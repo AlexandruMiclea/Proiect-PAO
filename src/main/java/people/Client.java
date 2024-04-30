@@ -13,8 +13,6 @@ public class Client extends Person {
 
     public void OrderMeal(Restaurant restaurant, Meal meal){
 
-        //
-
         // see if restaurant makes meal
         if (restaurant.getMealsInCatalogue().contains(meal)){
             // find a franchise that can make this meal

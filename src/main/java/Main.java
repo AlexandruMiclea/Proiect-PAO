@@ -1,5 +1,3 @@
-package main;
-
 import food.items.Dish;
 import food.items.Meal;
 import locations.Franchise;
