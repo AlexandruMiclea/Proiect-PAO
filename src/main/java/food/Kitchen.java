@@ -3,14 +3,14 @@ package food;
 import food.items.Meal;
 import food.items.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 // TODO make it so that this method can add ingredients, make dishes and deserts of those ingredients and
 public class Kitchen {
     // an instance of a kitchen has these items
-    private HashMap<Product, Double> availableItems; // Item in kitchen, quantity
-    private ArrayList<Meal> mealsToMake;
+    private Map<Product, Double> availableItems; // Item in kitchen, quantity
+    private List<Meal> mealsToMake;
 
     public Boolean canMakeMeal(Meal meal){
         // first check if it is in the list of items to make
@@ -18,7 +18,7 @@ public class Kitchen {
             //System.out.println("");
             return false;
         }
-        HashMap<Product, Double> recipe = meal.getItemList();
+        Map<Product, Double> recipe = meal.getItemList();
         for (Product product : recipe.keySet()) {
             if (availableItems.containsKey(product)){
                 return availableItems.get(product) >= recipe.get(product);
@@ -41,7 +41,7 @@ public class Kitchen {
             System.out.println("Added " + product.getName());
         }
     }
-    public void setRecipes(ArrayList<Meal> meals) {
+    public void setRecipes(List<Meal> meals) {
         this.mealsToMake = meals;
     }
 }

@@ -1,30 +1,36 @@
 package locations;
 
-public class Order {
-    static Integer orderID = 10000;
-    enum Type {
-        DINE_IN,
-        FOR_TAKEAWAY,
-        DELIVERY
-    }
-    enum Status {
-        RECEIVED,
-        CONFIRMED,
-        PREPARING,
-        RECEIVED_FOR_DELIVERY,
-        IN_DELIVERY
-    }
+import java.util.Random;
 
-    Type orderType;
-    Status orderStatus;
+public class Order {
+    private static Integer orderCount = 1;
+    private final Integer orderID = orderCount;
+
+    public OrderType orderType;
+    public OrderStatus orderStatus;
 
     Restaurant restaurant;
     Franchise franchise; // for now this will be given to the first franchise
     // TODO make a design pattern that assigns an order to a free location / nearest location etc.
 
-    public Order(Type orderType, Status orderStatus) {
+    public Order(OrderType orderType, OrderStatus orderStatus) {
         this.orderType = orderType;
         this.orderStatus = orderStatus;
-        this.orderID += 1;
+        orderCount += 1;
+    }
+
+    public Integer getOrderID() {
+        return orderID;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderID=" + orderID +
+                ", orderType=" + orderType +
+                ", orderStatus=" + orderStatus +
+                ", restaurant=" + restaurant.getRestaurantName() +
+                ", franchise=" + franchise.getLocation() +
+                '}';
     }
 }

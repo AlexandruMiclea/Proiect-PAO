@@ -4,8 +4,7 @@ import java.util.Set;
 
 // A dish is a finite product that requires multiple ingredients in order to produce.
 public class Dish extends Meal{
-
-    static final Double VAT = 0.19;
+    private static final Double VAT = 0.19;
 
     public Dish(Double timeToPrepare) {
         super(timeToPrepare);
@@ -22,8 +21,6 @@ public class Dish extends Meal{
         }
     }
 
-
-
     public Double getPrice() {
         double ans = 0.0;
         for (Product productKey : componentList.keySet()){
@@ -36,5 +33,10 @@ public class Dish extends Meal{
             }
         }
         return (1 + VAT) * ans;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

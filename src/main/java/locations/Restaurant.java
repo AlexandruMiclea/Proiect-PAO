@@ -3,31 +3,27 @@ package locations;
 import food.items.*;
 
 import java.io.*;
-import java.util.*;
+import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Objects;
 
 public class Restaurant {
-    final String restaurantName;
-    private HashMap<Product, Double> availableItems; // Item in kitchen, quantity
 
-    public ArrayList<Franchise> getFranchiseList() {
+    private final String restaurantName;
+    private Map<Product, Double> availableItems; // Item in kitchen, quantity
+    public List<Franchise> getFranchiseList() {
         return franchiseList;
     }
-
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "restaurantName='" + restaurantName + '\'' +
-                ", availableItems=" + availableItems +
-                ", franchiseList=" + franchiseList +
-                ", mealsInCatalogue=" + mealsInCatalogue +
-                ", director=" + director +
-                '}';
-    }
-
-    private ArrayList<Franchise> franchiseList;
-    private ArrayList<Meal> mealsInCatalogue;
+    private List<Franchise> franchiseList;
+    private List<Meal> mealsInCatalogue;
     Director director;
-    OrderList orderList;
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
 
     public Director getDirector() {
         return director;
@@ -66,7 +62,7 @@ public class Restaurant {
 
     // Interactive method
     public void addMealInCatalogue(String CSVPath, String classType) {
-        HashMap<Product, Double> readCompontents = new HashMap<Product, Double>();
+        Map<Product, Double> readCompontents = new HashMap<Product, Double>();
         String[] params;
         // make the ingredient list and give it to the dish/desert
         try {
@@ -100,10 +96,9 @@ public class Restaurant {
                 System.out.println("Wrong input! Try again!");
                 break;
         }
-
     }
 
-    public void setMealsInCatalogue(ArrayList<Meal> mealsInCatalogue) {
+    public void setMealsInCatalogue(List<Meal> mealsInCatalogue) {
         this.mealsInCatalogue = mealsInCatalogue;
     }
 
@@ -113,7 +108,18 @@ public class Restaurant {
         }
     }
 
-    public ArrayList<Meal> getMealsInCatalogue() {
+    public List<Meal> getMealsInCatalogue() {
         return mealsInCatalogue;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "restaurantName='" + restaurantName + '\'' +
+                ", availableItems=" + availableItems +
+                ", franchiseList=" + franchiseList +
+                ", mealsInCatalogue=" + mealsInCatalogue +
+                ", director=" + director +
+                '}';
     }
 }

@@ -3,7 +3,7 @@ package food.items;
 import java.util.Set;
 
 public class Desert extends Meal{
-    static final Double VAT = 0.24;
+    private static final Double VAT = 0.24;
 
     public Desert(Double timeToPrepare) {
         super(timeToPrepare);
@@ -32,5 +32,10 @@ public class Desert extends Meal{
             }
         }
         return (1 + VAT) * ans;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

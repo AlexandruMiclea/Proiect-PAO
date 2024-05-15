@@ -1,6 +1,6 @@
 package food.items;
 
-import java.util.HashMap;
+import java.util.Map;
 
 // a meal is a finite product, I can purchase this from a restaurant that makes it
 // somehow...
@@ -9,25 +9,25 @@ import java.util.HashMap;
 public abstract class Meal {
     final Double timeToPrepare;
 
+    public void setComponentList(Map<Product, Double> componentList) {
+        this.componentList = componentList;
+    }
+
+    Map<Product, Double> componentList; // a K-V pair that illustrates that V much of K is in my meal
+
+    Meal(Double timeToPrepare) {
+        this.timeToPrepare = timeToPrepare;
+    }
+
+    public Map<Product, Double> getItemList() {
+        return componentList;
+    }
+
     @Override
     public String toString() {
         return "Meal{" +
                 "timeToPrepare=" + timeToPrepare +
                 ", componentList=" + componentList +
                 '}';
-    }
-
-    public void setComponentList(HashMap<Product, Double> componentList) {
-        this.componentList = componentList;
-    }
-
-    HashMap<Product, Double> componentList; // a K-V pair that illustrates that V much of K is in my meal
-
-    Meal(Double timeToPrepare) {
-        this.timeToPrepare = timeToPrepare;
-    }
-
-    public HashMap<Product, Double> getItemList() {
-        return componentList;
     }
 }

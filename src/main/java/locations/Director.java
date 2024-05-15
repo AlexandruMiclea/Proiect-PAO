@@ -4,12 +4,13 @@ import locations.Franchise;
 import locations.Restaurant;
 import people.Person;
 
+import java.util.List;
 import java.util.ArrayList;
 
 // A restaurant has a director who can approve
 // if a new franchise is created
 public class Director extends Person {
-    ArrayList<Restaurant> restaurantsInjurisdiction;
+    List<Restaurant> restaurantsInjurisdiction;
     public Director(String firstName, String lastName, String ID, String gender) {
         super(firstName, lastName, ID, gender);
         this.restaurantsInjurisdiction = new ArrayList<>();
@@ -21,7 +22,7 @@ public class Director extends Person {
                 "restaurantsInjurisdiction=";
 
         for (Restaurant restaurant : restaurantsInjurisdiction) {
-            ans += restaurant.restaurantName;
+            ans += restaurant.getRestaurantName();
         }
         ans += "}";
 

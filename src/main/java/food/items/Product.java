@@ -18,4 +18,12 @@ public abstract class Product {
             this.VAT = 0.19;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "VAT=" + VAT +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

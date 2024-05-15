@@ -3,31 +3,22 @@ package locations;
 import food.Kitchen;
 
 public class Franchise{
-    Restaurant restaurant;
+    private final Restaurant restaurant;
+    private final Kitchen kitchen;
+    private final Manager manager;
     private Boolean approvedForOpening;
-    String location;
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
 
     public Kitchen getKitchen() {
         return kitchen;
     }
 
-    Kitchen kitchen;
-
     public Manager getManager() {
         return manager;
-    }
-
-    Manager manager;
-
-    @Override
-    public String toString() {
-        return "Franchise{" +
-                "restaurant=" + restaurant.restaurantName +
-                ", approvedForOpening=" + approvedForOpening +
-                ", location='" + location + '\'' +
-                ", kitchen=" + kitchen +
-                ", manager=" + manager +
-                '}';
     }
 
     Franchise(Restaurant restaurant, String location, String MgrFName, String MgrLName, String MgrID, String MgrGender) {
@@ -52,5 +43,16 @@ public class Franchise{
         if (!this.approvedForOpening) {
             this.approvedForOpening = true;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Franchise{" +
+                "restaurant=" + restaurant.getRestaurantName() +
+                ", approvedForOpening=" + approvedForOpening +
+                ", location='" + location + '\'' +
+                ", kitchen=" + kitchen +
+                ", manager=" + manager +
+                '}';
     }
 }
