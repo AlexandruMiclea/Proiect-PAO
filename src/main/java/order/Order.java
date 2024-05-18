@@ -6,17 +6,14 @@ import location.Restaurant;
 public class Order {
     private static Integer orderCount = 1;
     private final Integer orderID = orderCount;
-
     public OrderType orderType;
     public OrderStatus orderStatus;
-
     Restaurant restaurant;
-    Franchise franchise; // for now this will be given to the first franchise
-    // TODO make a design pattern that assigns an order to a free location / nearest location etc.
+    Franchise franchise;
 
-    public Order(OrderType orderType, OrderStatus orderStatus) {
+    public Order(OrderType orderType) {
         this.orderType = orderType;
-        this.orderStatus = orderStatus;
+        this.orderStatus = OrderStatus.RECEIVED;
         orderCount += 1;
     }
 

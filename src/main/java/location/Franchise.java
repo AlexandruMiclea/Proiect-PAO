@@ -4,7 +4,6 @@ import people.Manager;
 
 public class Franchise{
     private final Restaurant restaurant;
-    private final Kitchen kitchen;
     private final Manager manager;
     private Boolean approvedForOpening;
     private String location;

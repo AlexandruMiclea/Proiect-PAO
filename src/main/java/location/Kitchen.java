@@ -9,6 +9,7 @@ import java.util.Map;
 
 // TODO make it so that this method can add ingredients, make dishes and deserts of those ingredients and
 public class Kitchen {
+    private Franchise franchise;
     // an instance of a kitchen has these items
     private Map<Product, Double> availableItems; // Item in kitchen, quantity
     private List<Meal> mealsToMake;
