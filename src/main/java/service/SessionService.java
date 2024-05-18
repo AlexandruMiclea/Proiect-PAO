@@ -1,6 +1,6 @@
 package service;
 
-import people.Person;
+import model.people.Person;
 
 public class SessionService {
     private static SessionService sessionService;

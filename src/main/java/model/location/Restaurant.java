@@ -1,8 +1,7 @@
-package location;
+/*
+package model.location;
 
-import food.*;
-import people.Director;
-import people.Manager;
+import model.food.*;
 
 import java.io.*;
 import java.util.Map;
@@ -13,7 +12,6 @@ import java.util.Scanner;
 import java.util.Objects;
 
 public class Restaurant {
-
     private final String restaurantName;
     private Map<Product, Double> availableItems; // Item in kitchen, quantity
     public List<Franchise> getFranchiseList() {
@@ -124,4 +122,4 @@ public class Restaurant {
                 ", director=" + director +
                 '}';
     }
-}
+}*/

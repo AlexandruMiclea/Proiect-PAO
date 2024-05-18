@@ -1,31 +1,23 @@
-package location;
+/*
+package model.location;
 
-import people.Manager;
+import model.people.Person;
 
 public class Franchise{
     private final Restaurant restaurant;
-    private final Manager manager;
-    private Boolean approvedForOpening;
+    private Person manager;
     private String location;
 
     public String getLocation() {
         return location;
     }
-
-    public Kitchen getKitchen() {
-        return kitchen;
-    }
-
-    public Manager getManager() {
+    public Person getManager() {
         return manager;
     }
 
     Franchise(Restaurant restaurant, String location, String MgrFName, String MgrLName, String MgrID, String MgrGender) {
         this.restaurant = restaurant;
-        this.approvedForOpening = false;
         this.location = location;
-        this.kitchen = new Kitchen();
-        this.kitchen.setRecipes(restaurant.getMealsInCatalogue());
         this.manager = new Manager(MgrFName, MgrLName, MgrID, MgrGender);
     }
 
@@ -46,12 +38,6 @@ public class Franchise{
 
     @Override
     public String toString() {
-        return "Franchise{" +
-                "restaurant=" + restaurant.getRestaurantName() +
-                ", approvedForOpening=" + approvedForOpening +
-                ", location='" + location + '\'' +
-                ", kitchen=" + kitchen +
-                ", manager=" + manager +
-                '}';
+        return "This franchise belongs to the " + restaurant.getRestaurantName() + " chain of restaurants. It is located at " + location + ". " + manager.toString();
     }
-}
+}*/

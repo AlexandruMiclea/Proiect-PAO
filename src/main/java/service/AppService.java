@@ -1,5 +1,8 @@
 package service;
 
+import database.DbConnection;
+
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class AppService {
@@ -8,9 +11,11 @@ public class AppService {
     private final Scanner reader = new Scanner(System.in);
     private static ActionService actionService;
     private static SessionService sessionService;
+    private static Connection dbConnection;
     private AppService() {
         AppService.actionService = ActionService.getActionService();
         AppService.sessionService = SessionService.getSessionService();
+        AppService.dbConnection = DbConnection.getDbConnection();
     }
 
     private static AppService getService() {
@@ -65,7 +70,10 @@ public class AppService {
     }
 
     private void LoginMenu() {
-        System.out.println("Log in menu");
+        Boolean bFoundUsername;
+        System.out.println("Enter username: ");
+        String usernameInput = reader.nextLine();
+
     }
 
     private void RegisterMenu(){

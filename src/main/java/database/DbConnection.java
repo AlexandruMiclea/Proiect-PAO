@@ -1,4 +1,4 @@
-package config;
+package database;
 
 import java.sql.*;
 
@@ -7,6 +7,13 @@ public class DbConnection {
     private static final String user = "root";
     private static final String pass = "RootPa55!";
     private static Connection connection;
+
+    public static Connection getConnection() {
+        if (DbConnection.connection != null) {
+            connection = getDbConnection();
+        }
+        return DbConnection.connection;
+    }
 
     public static Connection getDbConnection() {
         try{

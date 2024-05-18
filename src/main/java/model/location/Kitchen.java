@@ -1,8 +1,8 @@
-package location;
+/*
+package model.location;
 
-import food.Meal;
-import food.Product;
-import people.Cook;
+import model.food.Meal;
+import model.food.Product;
 
 import java.util.List;
 import java.util.Map;
@@ -47,4 +47,4 @@ public class Kitchen {
     public void setRecipes(List<Meal> meals) {
         this.mealsToMake = meals;
     }
-}
+}*/

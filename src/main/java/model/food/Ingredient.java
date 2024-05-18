@@ -1,14 +1,14 @@
-package food;
+package model.food;
 
 // an ingredient is something used in preparing a dish / a desert. This should be a reference for a type of produce
 // the quantity of said produce is determined in the dish recipe list
-public class Ingredient extends Product{
-
+public class Ingredient {
+    private final String ingredientName;
     private final Double pricePerHundred;
-    private final Integer caloriesPerHundred;
+    private final Double caloriesPerHundred;
 
-    public Ingredient(String name, Boolean bHasSugar, Double pricePerHundred, Integer caloriesPerHundred) {
-        super(name, bHasSugar);
+    public Ingredient(String ingredientName, Double pricePerHundred, Double caloriesPerHundred) {
+        this.ingredientName = ingredientName;
         this.pricePerHundred = pricePerHundred;
         this.caloriesPerHundred = caloriesPerHundred;
     }
@@ -19,14 +19,9 @@ public class Ingredient extends Product{
 
     @Override
     public String toString() {
-        return "Nume: " + name +
+        return "Nume: " + ingredientName +
                 ", Calorii/100g: " + caloriesPerHundred +
                 ", Pret/100g: " + pricePerHundred +
                 ".";
     }
-
-    public Double getPriceWithoutVAT(Double quantity) {
-        return (1 - this.VAT) * ((this.pricePerHundred * quantity) / 100);
-    }
-
 }
