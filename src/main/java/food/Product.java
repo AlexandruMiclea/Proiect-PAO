@@ -1,4 +1,4 @@
-package food.items;
+package food;
 
 // A base class which represents something - half a kilo of pork, a bottle of juice, etc.
 public abstract class Product {

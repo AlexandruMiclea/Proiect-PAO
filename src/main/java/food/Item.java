@@ -1,4 +1,4 @@
-package food.items;
+package food;
 
 // an Item represents something that is sold as a whole -> a bottle of water, eating stuff, etc.
 public class Item extends Product{

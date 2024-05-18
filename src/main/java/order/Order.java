@@ -1,6 +1,7 @@
-package locations;
+package order;
 
-import java.util.Random;
+import location.Franchise;
+import location.Restaurant;
 
 public class Order {
     private static Integer orderCount = 1;

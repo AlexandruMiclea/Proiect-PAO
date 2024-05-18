@@ -1,8 +1,4 @@
-package locations;
-
-import people.Person;
-
-import java.security.Permission;
+package people;
 
 // The manager manages a restaurant location.1
 public class Manager extends Person {

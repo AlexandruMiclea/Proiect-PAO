@@ -1,6 +1,8 @@
-package locations;
+package location;
 
-import food.items.*;
+import food.*;
+import people.Director;
+import people.Manager;
 
 import java.io.*;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class Restaurant {
     public Restaurant(String restaurantName, String directorFName, String directorLName, String directorID, String directorGender) {
         this.restaurantName = restaurantName;
         this.director = new Director(directorFName, directorLName, directorID, directorGender);
-        this.director.restaurantsInjurisdiction.add(this);
+        this.director.addRestaurantInJurisdiction(this);
         this.franchiseList = new ArrayList<Franchise>();
         this.availableItems = new HashMap<Product, Double>();
         this.mealsInCatalogue = new ArrayList<Meal>();

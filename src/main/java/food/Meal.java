@@ -1,4 +1,4 @@
-package food.items;
+package food;
 
 import java.util.Map;
 

@@ -1,9 +1,9 @@
 package people;
 
-import food.items.Product;
-import locations.Franchise;
-import locations.Restaurant;
-import food.items.Meal;
+import food.Product;
+import location.Franchise;
+import location.Restaurant;
+import food.Meal;
 
 // a client is a person who places an order - be it online, in a franchise - dine-in or takeaway
 public class Client extends Person {

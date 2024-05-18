@@ -1,7 +1,8 @@
-package food;
+package location;
 
-import food.items.Meal;
-import food.items.Product;
+import food.Meal;
+import food.Product;
+import people.Cook;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ public class Kitchen {
     // an instance of a kitchen has these items
     private Map<Product, Double> availableItems; // Item in kitchen, quantity
     private List<Meal> mealsToMake;
+    private List<Cook> Cooks;
 
     public Boolean canMakeMeal(Meal meal){
         // first check if it is in the list of items to make

@@ -1,4 +1,4 @@
-package food.items;
+package food;
 
 // an ingredient is something used in preparing a dish / a desert. This should be a reference for a type of produce
 // the quantity of said produce is determined in the dish recipe list

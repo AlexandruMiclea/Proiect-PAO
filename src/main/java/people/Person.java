@@ -2,12 +2,10 @@ package people;
 
 // The most abstract representation of a person
 public abstract class Person {
-    String firstName;
-    String lastName;
-
-    // TODO regex validation for this
-    final String ID;
-    String gender;
+    private final String firstName;
+    private final String lastName;
+    private final String ID;
+    private final String gender;
 
     public Person(String firstName, String lastName, String ID, String gender) {
         this.firstName = firstName;
@@ -18,11 +16,6 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", ID='" + ID + '\'' +
-                ", gender='" + gender + '\'' +
-                '}';
+        return "Persoana cu numele de " + firstName + lastName + ", ID " + ID + ", gen " + gender + ".";
     }
 }

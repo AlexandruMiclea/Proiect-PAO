@@ -1,4 +1,4 @@
-package locations;
+package people;
 
 import people.Person;
 

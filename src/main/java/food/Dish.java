@@ -1,11 +1,12 @@
-package food.items;
+package food;
 
 import java.util.Set;
 
-public class Desert extends Meal{
-    private static final Double VAT = 0.24;
+// A dish is a finite product that requires multiple ingredients in order to produce.
+public class Dish extends Meal{
+    private static final Double VAT = 0.19;
 
-    public Desert(Double timeToPrepare) {
+    public Dish(Double timeToPrepare) {
         super(timeToPrepare);
     }
 

@@ -1,6 +1,6 @@
-package locations;
+package location;
 
-import food.Kitchen;
+import people.Manager;
 
 public class Franchise{
     private final Restaurant restaurant;
@@ -39,7 +39,7 @@ public class Franchise{
         this.manager = manager;
     }
 
-    void setApprovedForOpening(){
+    public void setApprovedForOpening(){
         if (!this.approvedForOpening) {
             this.approvedForOpening = true;
         }

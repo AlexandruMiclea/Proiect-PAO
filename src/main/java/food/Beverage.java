@@ -1,4 +1,4 @@
-package food.items;
+package food;
 
 final class Beverage extends Item{
     private Double size;
