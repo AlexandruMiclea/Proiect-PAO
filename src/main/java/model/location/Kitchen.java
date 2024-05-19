@@ -60,6 +60,10 @@ public class Kitchen {
         }
     }
 
+    public void removeIngredientFromInventory(Ingredient ingredient) {
+        this.inventory.remove(ingredient, inventory.get(ingredient));
+    }
+
     public void addCookToKitchen(Person cook, Boolean isBusy) {
         // see if I already have what I need, then just increment
         if (this.cooks.containsKey(cook)){
@@ -68,5 +72,10 @@ public class Kitchen {
         else { // create new entry
             this.cooks.put(cook, isBusy);
         }
+    }
+
+    public void removeCookFromKitchen(Person cook) {
+        // see if I already have what I need, then just increment
+        this.cooks.remove(cook, cooks.get(cook));
     }
 }

@@ -42,6 +42,10 @@ public class Restaurant {
         this.mealsInCatalogue.add(meal);
     }
 
+    public void removeMealFromCatalogue(Meal meal) {
+        this.mealsInCatalogue.remove(meal);
+    }
+
     @Override
     public String toString() {
         String ans = "Restaurant " + restaurantName + ", " + director.toString() + ", serves the following meals:\n";
