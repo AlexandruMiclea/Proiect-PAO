@@ -4,22 +4,24 @@ package model.order;
 import model.people.Person;
 import model.people.PersonType;
 
+import java.util.Date;
+
 public class Order {
-    private static Long orderCount = 1L;
-    private final Long orderID = orderCount;
+    private final String orderID;
     private OrderType orderType;
     private OrderStatus orderStatus;
     private Person deliveryDriver;
     private final Person client;
+    private final Date orderDate;
 
-    //Franchise franchise;
-
-    public Order(OrderType orderType, Person client) {
-        assert (client.getPersonType() == PersonType.CLIENT);
+    // db ctor
+    public Order(String orderID, OrderType orderType, OrderStatus orderStatus, Person deliveryDriver, Person client, Date orderDate) {
+        this.orderID = orderID;
         this.orderType = orderType;
-        this.orderStatus = OrderStatus.RECEIVED;
+        this.orderStatus = orderStatus;
+        this.deliveryDriver = deliveryDriver;
         this.client = client;
-        orderCount += 1;
+        this.orderDate = orderDate;
     }
 
     public void assignDeliveryDriver(Person person){
@@ -34,14 +36,9 @@ public class Order {
             }
         }
     }
-
-    public Long getOrderID() {
-        return orderID;
-    }
-
     @Override
     public String toString() {
-        String ans = "Order no: " +  orderID + orderStatus + ". Type of order: " + orderType + ". Order placed by " + client.toString() + ". Type of order: " + orderType + ".";
+        String ans = "Order no: " +  orderID + "/" + orderDate.toString() + " " + orderStatus + ". Type of order: " + orderType + ". Order placed by " + client.toString() +  ".";
         if (deliveryDriver != null && orderType == OrderType.DELIVERY) {
             ans += " Order will be delivered by: " + deliveryDriver.toString() + ".";
         }

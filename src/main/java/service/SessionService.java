@@ -1,19 +1,18 @@
 package service;
 
 import model.people.Person;
+import model.people.PersonType;
 
 public class SessionService {
     private static SessionService sessionService;
     private static Person loggedPerson;
-    private SessionService() {
-
-    }
+    private SessionService(){};
 
     public static SessionService getSessionService() {
         if (SessionService.sessionService == null) {
             SessionService.sessionService = new SessionService();
         }
-        return  SessionService.sessionService;
+        return SessionService.sessionService;
     }
 
     public void LogIn(Person person) {
@@ -28,10 +27,10 @@ public class SessionService {
         }
     }
 
-    public String getLoggedPersonType() {
+    public PersonType getLoggedPersonType() {
         if (loggedPerson != null) {
-            return String.valueOf(loggedPerson.getClass());
+            return loggedPerson.getPersonType();
         }
-        return "unauthenticated";
+        return null;
     }
 }

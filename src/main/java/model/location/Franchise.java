@@ -8,13 +8,6 @@ public class Franchise{
     private Person manager;
     private String location;
 
-    public String getLocation() {
-        return location;
-    }
-    public Person getManager() {
-        return manager;
-    }
-
     Franchise(Restaurant restaurant, String location, String MgrFName, String MgrLName, String MgrID, String MgrGender) {
         this.restaurant = restaurant;
         this.location = location;
@@ -40,4 +33,5 @@ public class Franchise{
     public String toString() {
         return "This franchise belongs to the " + restaurant.getRestaurantName() + " chain of restaurants. It is located at " + location + ". " + manager.toString();
     }
-}*/
+}
+*/

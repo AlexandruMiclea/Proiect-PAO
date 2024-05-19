@@ -12,7 +12,6 @@ public class ActionService {
 
     private ActionService() {
         pathName = new File("").getAbsolutePath() + "/logs/";
-        fileWriter = createLogFile();
     }
 
     public void closeFileWriter() {
@@ -24,6 +23,10 @@ public class ActionService {
             }
             fileWriter = null;
         }
+    }
+
+    public boolean getWriteStatus() {
+        return fileWriter == null;
     }
 
     public void toggleFileWriter() {

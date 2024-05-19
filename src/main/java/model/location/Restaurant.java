@@ -1,33 +1,18 @@
-/*
 package model.location;
 
 import model.food.*;
+import model.people.Person;
 
 import java.io.*;
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Objects;
+import java.util.*;
 
 public class Restaurant {
+    private final String restaurantID;
     private final String restaurantName;
-    private Map<Product, Double> availableItems; // Item in kitchen, quantity
-    public List<Franchise> getFranchiseList() {
-        return franchiseList;
-    }
-    private List<Franchise> franchiseList;
+    private Map<Ingredient, Double> availableItems; // Item in kitchen, quantity
     private List<Meal> mealsInCatalogue;
-    Director director;
+    Person director;
 
-    public String getRestaurantName() {
-        return restaurantName;
-    }
-
-    public Director getDirector() {
-        return director;
-    }
 
     public Restaurant(String restaurantName, String directorFName, String directorLName, String directorID, String directorGender) {
         this.restaurantName = restaurantName;
@@ -122,4 +107,4 @@ public class Restaurant {
                 ", director=" + director +
                 '}';
     }
-}*/
+}

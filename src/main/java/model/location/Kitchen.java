@@ -1,19 +1,20 @@
 /*
 package model.location;
 
+import model.food.Ingredient;
 import model.food.Meal;
-import model.food.Product;
+import model.location.Franchise;
 
 import java.util.List;
 import java.util.Map;
 
 // TODO make it so that this method can add ingredients, make dishes and deserts of those ingredients and
 public class Kitchen {
+    private String kitchenID;
     private Franchise franchise;
-    // an instance of a kitchen has these items
-    private Map<Product, Double> availableItems; // Item in kitchen, quantity
-    private List<Meal> mealsToMake;
-    private List<Cook> Cooks;
+    // inventory list
+    private Map<Ingredient, Double> listOf; // items available in the kitchen
+    private List<Cook> cooks;
 
     public Boolean canMakeMeal(Meal meal){
         // first check if it is in the list of items to make
@@ -47,4 +48,5 @@ public class Kitchen {
     public void setRecipes(List<Meal> meals) {
         this.mealsToMake = meals;
     }
-}*/
+}
+*/
