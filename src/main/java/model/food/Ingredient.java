@@ -12,6 +12,18 @@ public class Ingredient {
         return ingredientName;
     }
 
+    public String getIngredientID() {
+        return ingredientID;
+    }
+
+    public Double getPricePerHundred() {
+        return pricePerHundred;
+    }
+
+    public Double getCaloriesPerHundred() {
+        return caloriesPerHundred;
+    }
+
     // DB
     public Ingredient(String ingredientID, String ingredientName, Double pricePerHundred, Double caloriesPerHundred) {
         this.ingredientID = ingredientID;

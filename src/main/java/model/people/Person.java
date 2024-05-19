@@ -26,6 +26,22 @@ public class Person {
         return personType;
     }
 
+    public Integer getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
     // DB constructor
     public Person(String personID, String firstName, String lastName, String gender, String username, Integer hashedPassword, PersonType personType) {
         this.firstName = firstName;

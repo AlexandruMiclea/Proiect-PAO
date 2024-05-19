@@ -1,32 +1,34 @@
-/*
 package model.location;
 
 import model.people.Person;
 
 public class Franchise{
+    private final String franchiseID;
     private final Restaurant restaurant;
     private Person manager;
     private String location;
 
-    Franchise(Restaurant restaurant, String location, String MgrFName, String MgrLName, String MgrID, String MgrGender) {
-        this.restaurant = restaurant;
-        this.location = location;
-        this.manager = new Manager(MgrFName, MgrLName, MgrID, MgrGender);
+    public String getFranchiseID() {
+        return franchiseID;
     }
 
-    Franchise(Restaurant restaurant, String location, Manager manager) {
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public Person getManager() {
+        return manager;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Franchise(String franchiseID, Restaurant restaurant, Person manager, String location) {
+        this.franchiseID = franchiseID;
         this.restaurant = restaurant;
-        this.approvedForOpening = false;
-        this.location = location;
-        this.kitchen = new Kitchen();
-        this.kitchen.setRecipes(restaurant.getMealsInCatalogue());
         this.manager = manager;
-    }
-
-    public void setApprovedForOpening(){
-        if (!this.approvedForOpening) {
-            this.approvedForOpening = true;
-        }
+        this.location = location;
     }
 
     @Override
@@ -34,4 +36,3 @@ public class Franchise{
         return "This franchise belongs to the " + restaurant.getRestaurantName() + " chain of restaurants. It is located at " + location + ". " + manager.toString();
     }
 }
-*/

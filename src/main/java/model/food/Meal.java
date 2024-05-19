@@ -16,6 +16,26 @@ public class Meal {
     private final Double price;
     Map<Ingredient, Double> ingredientList;
 
+    public String getMealID() {
+        return mealID;
+    }
+
+    public String getMealName() {
+        return mealName;
+    }
+
+    public Double getTimeToPrepare() {
+        return timeToPrepare;
+    }
+
+    public MealType getMealType() {
+        return mealType;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
     public Meal(String mealID, String mealName, Double timeToPrepare, MealType mealType, Double price) {
         this.mealID = mealID;
         this.mealName = mealName;
@@ -28,6 +48,11 @@ public class Meal {
     public void addIngredient(Ingredient ingredient, Double quantity) {
         this.ingredientList.put(ingredient, quantity);
     }
+
+    public Map<Ingredient, Double> getIngredientList() {
+        return ingredientList;
+    }
+
 
     @Override
     public String toString() {

@@ -8,6 +8,18 @@ public class Item {
     private final String itemName;
     private final Double price;
 
+    public String getItemID() {
+        return itemID;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
     public Item(String itemID, String itemName, Double price) {
         this.itemID = itemID;
         this.itemName = itemName;

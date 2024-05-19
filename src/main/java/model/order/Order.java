@@ -14,6 +14,30 @@ public class Order {
     private final Person client;
     private final Date orderDate;
 
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public OrderType getOrderType() {
+        return orderType;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public Person getDeliveryDriver() {
+        return deliveryDriver;
+    }
+
+    public Person getClient() {
+        return client;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
     // db ctor
     public Order(String orderID, OrderType orderType, OrderStatus orderStatus, Person deliveryDriver, Person client, Date orderDate) {
         this.orderID = orderID;

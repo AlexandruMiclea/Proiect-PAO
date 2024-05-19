@@ -40,25 +40,6 @@ create table if not exists `Restaurant` (
 
 insert into `Restaurant` values ('mock_restaurant_id', 'Mock Restaurant', 'mock_director_id');
 
-create table if not exists `Franchise` (
-                                           franchiseID varchar(255),
-                                           managerID varchar(255),
-                                           location varchar(255),
-                                           primary key (franchiseID),
-                                           foreign key (managerID) references Person(personID)
-);
-
-insert into `Franchise` values ('mock_franchise_id', 'mock_manager_id', 'Mock Location');
-
-create table if not exists `Kitchen` (
-                                         kitchenID varchar(255),
-                                         franchiseID varchar(255),
-                                         primary key (kitchenID),
-                                         foreign key (franchiseID) references Franchise(franchiseID)
-);
-
-insert into Kitchen values ('mock_kitchen_id', 'mock_franchise_id');
-
 create table if not exists `Meal`(
                                      mealID varchar(255),
                                      mealType ENUM('BEVERAGE', 'DISH', 'DESERT'),
@@ -107,3 +88,66 @@ insert into `Meal_has_Ingredient` values ('mock_ingredient1', 'mock_desert', 120
 insert into `Meal_has_Ingredient` values ('mock_ingredient2', 'mock_beverage', 120.00);
 insert into `Meal_has_Ingredient` values ('mock_ingredient3', 'mock_dish', 120.00);
 insert into `Meal_has_Ingredient` values ('mock_ingredient4', 'mock_dish', 120.00);
+
+create table if not exists `Restaurant` (
+    restaurantID varchar(255),
+    restaurantName varchar(255),
+    directorID varchar(255),
+    primary key (restaurantID),
+    foreign key (directorID) references Person (personID)
+);
+
+insert into `Restaurant` values ('mock_restaurant', 'Al Freddo', 'mock_director_id');
+
+create table if not exists `Franchise` (
+    franchiseID varchar(255),
+    restaurantID varchar(255),
+    managerID varchar(255),
+    location varchar(255),
+    primary key (franchiseID),
+    foreign key (restaurantID) references Restaurant(restaurantID),
+    foreign key (managerID) references Person(personID)
+);
+
+insert into `Franchise` values ('mock_franchise_id', 'mock_restaurant', 'mock_manager_id', 'Primaverii 25');
+
+create table if not exists `Kitchen` (
+                                         kitchenID varchar(255),
+                                         franchiseID varchar(255),
+                                         primary key (kitchenID),
+                                         foreign key (franchiseID) references Franchise(franchiseID)
+);
+
+insert into Kitchen values ('mock_kitchen_id', 'mock_franchise_id');
+
+create table if not exists `Meal_in_Restaurant` (
+        restaurantID varchar(255),
+        mealID varchar(255),
+    primary key (restaurantID, mealID),
+    foreign key (restaurantID) references Restaurant(restaurantID),
+    foreign key (mealID) references  Meal(mealID)
+);
+
+-- todo add inserts here for mock data
+
+create table if not exists `Ingredient_in_Kitchen` (
+    ingredientID varchar(255),
+    kitchenID varchar(255),
+    quantity Double,
+    primary key (ingredientID, kitchenID),
+    foreign key (ingredientID) references Ingredient(ingredientID),
+    foreign key (kitchenID) references Kitchen(kitchenID)
+);
+
+-- todo mock data
+
+create table if not exists `Cook_in_Kitchen` (
+    cookID varchar(255),
+    kitchenID varchar(255),
+    isBusy bool,
+    primary key (cookID, kitchenID),
+    foreign key (cookID) references Person(personID),
+    foreign key (kitchenID) references Kitchen(kitchenID)
+);
+
+-- todo mock data
