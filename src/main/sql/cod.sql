@@ -15,21 +15,6 @@ insert into Person values ('mock_director_id', 'mock_director_un', 1557416358, '
 insert into Person values ('mock_delivery_driver_id', 'mock_delivery_driver_un', 1557416358, 'Mock', 'Delivery Driver', 'X', 'DELIVERY_DRIVER');
 -- passwords for all of these is: mock_pass
 
-create table if not exists `Order` (
-                                       orderID varchar(255),
-                                       orderType ENUM('DINE_IN', 'TAKEAWAY', 'DELIVERY'),
-                                       orderStatus ENUM('RECEIVED', 'PREPARING', 'WAITING_FOR_PICKUP', 'IN_DELIVERY', 'DONE'),
-                                       deliveryDriverID varchar(255),
-                                       clientID varchar(255),
-                                       orderDate date,
-                                       primary key (orderID),
-                                       foreign key (deliveryDriverID) references Person(personID),
-                                       foreign key (clientID) references Person(personID)
-);
-
-insert into `Order` values (58934758, 'TAKEAWAY', 'RECEIVED', 'mock_delivery_driver_id', 'mock_client_id', sysdate());
-
-
 create table if not exists `Restaurant` (
                                             restaurantID varchar(255),
                                             name varchar(255),
@@ -39,6 +24,23 @@ create table if not exists `Restaurant` (
 );
 
 insert into `Restaurant` values ('mock_restaurant_id', 'Mock Restaurant', 'mock_director_id');
+
+create table if not exists `Order` (
+                                       orderID varchar(255),
+                                       orderType ENUM('DINE_IN', 'TAKEAWAY', 'DELIVERY'),
+                                       orderStatus ENUM('RECEIVED', 'PREPARING', 'WAITING_FOR_PICKUP', 'IN_DELIVERY', 'DONE'),
+                                       deliveryDriverID varchar(255),
+                                        restaurantID varchar(255),
+                                       clientID varchar(255),
+                                       orderDate date,
+                                       primary key (orderID),
+                                       foreign key (deliveryDriverID) references Person(personID),
+                                       foreign key (clientID) references Person(personID),
+    foreign key (restaurantID) references Restaurant(restaurantID)
+);
+
+insert into `Order` values (58934758, 'TAKEAWAY', 'RECEIVED', 'mock_delivery_driver_id', 'mock_restaurant_id', 'mock_client_id', sysdate());
+
 
 create table if not exists `Meal`(
                                      mealID varchar(255),

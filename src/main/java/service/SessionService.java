@@ -27,6 +27,10 @@ public class SessionService {
         }
     }
 
+    public static Person getLoggedPerson() {
+        return loggedPerson;
+    }
+
     public PersonType getLoggedPersonType() {
         if (loggedPerson != null) {
             return loggedPerson.getPersonType();

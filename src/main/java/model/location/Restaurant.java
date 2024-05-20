@@ -48,7 +48,7 @@ public class Restaurant {
 
     @Override
     public String toString() {
-        String ans = "Restaurant " + restaurantName + ", " + director.toString() + ", serves the following meals:\n";
+        String ans = "Restaurant " + restaurantName + ", which serves the following meals:\n";
         for (Meal meal : mealsInCatalogue) {
             ans += meal.toString() + '\n';
         }

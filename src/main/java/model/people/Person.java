@@ -53,6 +53,17 @@ public class Person {
         this.personType = personType;
     }
 
+    // User register ctor
+    public Person(String firstName, String lastName, String gender, String username, String Password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personID = RandomString.getRandomString();
+        this.gender = gender;
+        this.username = username;
+        this.hashedPassword = Password.hashCode();
+        this.personType = PersonType.CLIENT;
+    }
+
     // register constructor TODO implement
 
     // todo repair tostring

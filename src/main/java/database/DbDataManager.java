@@ -62,15 +62,27 @@ public class DbDataManager {
         return meals;
     }
 
+    public Map<String, Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public Map<String, Franchise> getFranchises() {
+        return franchises;
+    }
+
+    public Map<String, Kitchen> getKitchens() {
+        return kitchens;
+    }
+
     protected DbDataManager(Connection connection) {
         DbDataManager.connection = connection;
         readPersons();
+        readRestaurants();
         readOrders();
         readIngredients();
         readItems();
         readMeals();
         readMealHasIngredients();
-        readRestaurants();
         readFranchises();
         readKitchens();
         readMealsInRestaurant();
@@ -98,7 +110,7 @@ public class DbDataManager {
                 String lastName = rez.getString("lastName");
                 String gender = rez.getString("gender");
                 PersonType personType = PersonType.valueOf(rez.getString("personType"));
-                this.persons.put(personID, new Person(personID, firstName, lastName, gender, username, hashedPassword, personType));
+                this.persons.put(username, new Person(personID, firstName, lastName, gender, username, hashedPassword, personType));
             }
         } catch (SQLException e) {
             System.out.println("Error: cannot get persons from database!");
@@ -114,13 +126,15 @@ public class DbDataManager {
                 String orderID = rez.getString("orderID");
                 OrderType orderType = OrderType.valueOf(rez.getString("orderType"));
                 OrderStatus orderStatus = OrderStatus.valueOf(rez.getString("orderStatus"));
+                String restaurantID = rez.getString("restaurantID");
                 String deliveryDriverID = rez.getString("deliveryDriverID");
                 String clientID = rez.getString("clientID");
                 Date orderDate = rez.getDate("orderDate");
 
                 Person deliveryDriver = persons.get(deliveryDriverID);
                 Person client = persons.get(clientID);
-                this.orders.put(orderID, new Order(orderID, orderType, orderStatus, deliveryDriver, client, orderDate));
+                Restaurant restaurant = restaurants.get(restaurantID);
+                this.orders.put(orderID, new Order(orderID, orderType, orderStatus, restaurant, deliveryDriver, client, orderDate));
             }
         } catch (SQLException e) {
             System.out.println("Error: cannot get orders from database!");
@@ -310,7 +324,7 @@ public class DbDataManager {
     }
 
     public void addPerson (Person person) {
-        this.persons.put(person.getPersonID(), person);
+        this.persons.put(person.getUsername(), person);
         try {
             String sql = "insert into Person values (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -330,7 +344,7 @@ public class DbDataManager {
     public void addOrder (Order order) {
         this.orders.put(order.getOrderID(), order);
         try {
-            String sql = "insert into `Order` values (?,?,?,?,?,?);";
+            String sql = "insert into `Order` values (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, order.getOrderID());
             pstmt.setString(2, order.getOrderType().toString());
@@ -340,8 +354,9 @@ public class DbDataManager {
             } else {
                 pstmt.setString(4, null);
             }
-            pstmt.setString(5, order.getClient().getPersonID());
-            pstmt.setDate(6, new java.sql.Date(System.currentTimeMillis()));
+            pstmt.setString(5, order.getRestaurant().getRestaurantID());
+            pstmt.setString(6, order.getClient().getPersonID());
+            pstmt.setDate(7, new java.sql.Date(System.currentTimeMillis()));
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error: cannot add order in database!");
@@ -498,7 +513,7 @@ public class DbDataManager {
     // todo test
     public void updateOrder (Order order) {
         try {
-            String sql = "update `Order` set orderType=?, orderStatus=?, deliveryDriverID=?, clientID=?, orderDate=? where orderID=?";
+            String sql = "update `Order` set orderType=?, orderStatus=?, deliveryDriverID=?, restaurantID=?, clientID=?, orderDate=? where orderID=?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, order.getOrderType().toString());
             pstmt.setString(2, order.getOrderStatus().toString());
@@ -507,9 +522,10 @@ public class DbDataManager {
             } else {
                 pstmt.setString(3, null);
             }
-            pstmt.setString(4, order.getClient().getPersonID());
-            pstmt.setDate(5, new java.sql.Date(order.getOrderDate().getTime()));
-            pstmt.setString(6, order.getOrderID());
+            pstmt.setString(4, order.getRestaurant().getRestaurantID());
+            pstmt.setString(5, order.getClient().getPersonID());
+            pstmt.setDate(6, new java.sql.Date(order.getOrderDate().getTime()));
+            pstmt.setString(7, order.getOrderID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error: cannot update order in database!");
@@ -635,7 +651,7 @@ public class DbDataManager {
         } catch (SQLException e) {
             System.out.println("Error: cannot remove person from database!");
         }
-        this.persons.remove(person.getPersonID(), person);
+        this.persons.remove(person.getUsername(), person);
     }
     // todo test
     public void deleteOrder (Order order) {

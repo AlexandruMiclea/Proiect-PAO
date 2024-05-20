@@ -1,6 +1,7 @@
 package model.order;
 
 //import model.location.Franchise;
+import model.location.Restaurant;
 import model.people.Person;
 import model.people.PersonType;
 
@@ -12,6 +13,7 @@ public class Order {
     private OrderStatus orderStatus;
     private Person deliveryDriver;
     private final Person client;
+    private final Restaurant restaurant;
     private final Date orderDate;
 
     public String getOrderID() {
@@ -38,11 +40,16 @@ public class Order {
         return orderDate;
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
     // db ctor
-    public Order(String orderID, OrderType orderType, OrderStatus orderStatus, Person deliveryDriver, Person client, Date orderDate) {
+    public Order(String orderID, OrderType orderType, OrderStatus orderStatus, Restaurant restaurant, Person deliveryDriver, Person client, Date orderDate) {
         this.orderID = orderID;
         this.orderType = orderType;
         this.orderStatus = orderStatus;
+        this.restaurant = restaurant;
         this.deliveryDriver = deliveryDriver;
         this.client = client;
         this.orderDate = orderDate;
