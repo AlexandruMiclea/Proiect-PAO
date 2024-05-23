@@ -214,7 +214,8 @@ public class AppService {
         System.out.println("1. Log out");
         System.out.println("2. Place order");
         System.out.println("3. List past orders");
-        System.out.println("4. Exit");
+        System.out.println("4. Consult Restaurant menus");
+        System.out.println("5. Exit");
 
         String ans = reader.nextLine();
         switch (ans.toLowerCase()){
@@ -232,10 +233,15 @@ public class AppService {
             case "list":
             case "past":
             case "list past orders":
-                // TODO add list past orders function
                 this.PastOrders(SessionService.getLoggedPerson());
                 break;
             case "4":
+            case "consult":
+            case "menu":
+            case "restaurant menus":
+                this.ConsultRestaurantMeals();
+                break;
+            case "5":
             case "exit":
             case "quit":
                 bRunApp = false;
@@ -623,6 +629,38 @@ public class AppService {
             if (order.getClient().equals(person)) {
                 System.out.println(order);
             }
+        }
+    }
+
+    private void ConsultRestaurantMeals() {
+        Restaurant rChoice = null;
+        boolean bNumIsValid = false;
+        while (!bNumIsValid) {
+            System.out.println("These are the restaurants you can order from:");
+            int idx = 1;
+            String[] IDs = new String[dataManager.getRestaurants().size() + 2];
+            for (Restaurant restaurant : dataManager.getRestaurants().values()) {
+                System.out.println(restaurant.getRestaurantName());
+                IDs[idx++] = restaurant.getRestaurantID();
+            }
+            System.out.println("Select restaurant to consult (1->" + (idx - 1) + "):");
+            String ans = reader.nextLine();
+
+            int value;
+            try {
+                value = Integer.parseInt(ans);
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a numeric value!");
+                continue;
+            }
+
+            if (value > 0 && value <= idx - 1) {
+                rChoice = dataManager.getRestaurants().get(IDs[value]);
+                bNumIsValid = true;
+            }
+        }
+        for (Meal meal : rChoice.getMealsInCatalogue()) {
+            System.out.println(meal);
         }
     }
 }

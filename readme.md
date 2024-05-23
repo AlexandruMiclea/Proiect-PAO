@@ -21,7 +21,8 @@
 2. User can login into his account
 3. Client can place an order
 4. Client can consult his past orders 
-5. Director can open a new restaurant chain
-6. Director can list restaurants 
-7. Director can open a new franchise (for a restaurant that is under his jurisdiction)
-8. Director cam appoint a manager for a franchise
+5. Client can consult what meals he can order from a restaurant
+6. Director can open a new restaurant chain
+7. Director can list restaurants 
+8. Director can open a new franchise (for a restaurant that is under his jurisdiction)
+9. Director cam appoint a manager for a franchise

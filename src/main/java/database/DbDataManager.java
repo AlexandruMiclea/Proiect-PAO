@@ -101,7 +101,6 @@ public class DbDataManager {
         return dataManager;
     }
 
-    // TODO map person id to username
     public void readPersons () {
         if (DbDataManager.connection != null){
             try {
