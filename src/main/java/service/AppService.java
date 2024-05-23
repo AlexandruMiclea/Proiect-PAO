@@ -3,12 +3,14 @@ package service;
 import database.DbConnection;
 import database.DbDataManager;
 import model.food.Meal;
+import model.location.Franchise;
 import model.location.Restaurant;
+import model.order.Order;
+import model.order.OrderType;
 import model.people.Person;
 import model.people.PersonType;
 
 import java.sql.Connection;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -164,23 +166,39 @@ public class AppService {
     }
 
     private void DirectorMenu(){
-        System.out.println("1. Log in");
-        System.out.println("2. Register");
-        System.out.println("3. Exit");
+        System.out.println("1. Log out");
+        System.out.println("2. Open resturant");
+        System.out.println("3. Open resturant franchise");
+        System.out.println("4. List owned restaurants");
+        System.out.println("5. Appoint franchise manager");
+        System.out.println("6. Exit");
 
         String ans = reader.nextLine();
         switch (ans.toLowerCase()){
             case "1":
-            case "login":
-            case "log in":
-                LoginMenu();
+            case "logout":
+            case "log out":
+                sessionService.LogOut();
                 break;
             case "2":
-            case "register":
-            case "reg":
-                RegisterMenu();
+            case "open restaurant":
+                this.OpenRestaurant(SessionService.getLoggedPerson());
                 break;
             case "3":
+            case "open franchise":
+                this.OpenFranchise();
+                break;
+            case "4":
+            case "list":
+            case "list owned":
+                this.ListRestaurants(SessionService.getLoggedPerson());
+                break;
+            case "5":
+            case "appoint":
+            case "manager":
+                this.AppointManager();
+                break;
+            case "6":
             case "exit":
             case "quit":
                 bRunApp = false;
@@ -208,14 +226,14 @@ public class AppService {
             case "2":
             case "order":
             case "place order":
-                // TODO add place order function
-                placeOrder(SessionService.getLoggedPerson());
+                PlaceOrder(SessionService.getLoggedPerson());
                 break;
             case "3":
             case "list":
             case "past":
             case "list past orders":
                 // TODO add list past orders function
+                this.PastOrders(SessionService.getLoggedPerson());
                 break;
             case "4":
             case "exit":
@@ -349,10 +367,10 @@ public class AppService {
         }
     }
 
-    private void placeOrder(Person person) {
+    private void PlaceOrder(Person person) {
         actionService.writeToLogFile("place_order");
         Restaurant choice = null;
-        String _restaurantId;
+        Meal choiceMeal = null;
         boolean bNumIsValid = false;
         while (!bNumIsValid) {
             System.out.println("These are the restaurants you can order from:");
@@ -360,7 +378,7 @@ public class AppService {
             String[] IDs = new String[dataManager.getRestaurants().size() + 2];
             for (Restaurant restaurant : dataManager.getRestaurants().values()){
                 IDs[idx] = restaurant.getRestaurantID();
-                System.out.println(idx++ + ". " + restaurant.toString());
+                System.out.println(idx++ + ". " + restaurant);
             }
             System.out.println("Select restaurant to order from (1->" + dataManager.getRestaurants().size() + "):");
             String ans = reader.nextLine();
@@ -375,12 +393,6 @@ public class AppService {
 
             if (value > 0 && value <= dataManager.getRestaurants().size()) {
                 choice = dataManager.getRestaurants().get(IDs[value]);
-                _restaurantId = IDs[value];
-
-                System.out.println("Choose meal to order (1->" + choice.getMealsInCatalogue().size() + "):");
-                for (Meal meal : choice.getMealsInCatalogue()){
-                    System.out.println(meal);
-                }
                 bNumIsValid = true;
             } else {
                 System.out.println("Input a value that is in the correct range!");
@@ -406,18 +418,210 @@ public class AppService {
                 continue;
             }
 
-            if (value > 0 && value <= dataManager.getRestaurants().size()) {
+            if (value > 0 && value <= choice.getMealsInCatalogue().size()) {
                 bNumIsValid = true;
-                choice = dataManager.getRestaurants().get(IDs[value]);
-                _restaurantId = IDs[value];
-
-                System.out.println("Choose meal to order (1->" + choice.getMealsInCatalogue().size() + "):");
-                for (Meal meal : choice.getMealsInCatalogue()){
-                    System.out.println(meal);
-                }
-
+                choiceMeal = dataManager.getMeals().get(IDs[value]);
             } else {
                 System.out.println("Input a value that is in the correct range!");
+            }
+        }
+        bNumIsValid = false;
+        OrderType type = null;
+        while (!bNumIsValid) {
+            System.out.println("Choose order type:");
+            System.out.println("1. Dine-in");
+            System.out.println("2. Delivery");
+            System.out.println("3. Takeaway");
+
+            String ans = reader.nextLine().toLowerCase();
+            switch (ans){
+                case "dine-in":
+                case "1":
+                    bNumIsValid = true;
+                    type = OrderType.DINE_IN;
+                    break;
+                case "delivery":
+                case "2":
+                    bNumIsValid = true;
+                    type = OrderType.DELIVERY;
+                    break;
+                case "takeaway":
+                case "3":
+                    bNumIsValid = true;
+                    type = OrderType.TAKEAWAY;
+                    break;
+                default:
+                    System.out.println("Please input a valid choice!");
+            }
+        }
+        System.out.println("Thank you for ordering!");
+        Order order = new Order(type, choice, person);
+        dataManager.addOrder(order);
+    }
+
+    private void OpenRestaurant(Person director) {
+        actionService.writeToLogFile("open_restaurant");
+        System.out.println("Name your restaurant: ");
+        String ans = reader.nextLine();
+        Restaurant restaurant = new Restaurant(ans, director);
+        dataManager.addRestaurant(restaurant);
+    }
+
+    private void ListRestaurants(Person director){
+        actionService.writeToLogFile("list_restaurants");
+        System.out.println("The restaurants you own are the following:");
+        for (Restaurant restaurant : dataManager.getRestaurants().values()){
+            if (restaurant.getDirector().equals(director)) {
+                System.out.println(restaurant.getRestaurantName());
+            }
+        }
+    }
+
+    private void OpenFranchise(){
+        actionService.writeToLogFile("open_franchise");
+        Restaurant choice;
+        boolean bNumIsValid = false;
+        while (!bNumIsValid) {
+            System.out.println("These are the restaurants you own:");
+            int idx = 1;
+            String[] IDs = new String[dataManager.getRestaurants().size() + 2];
+            for (Restaurant restaurant : dataManager.getRestaurants().values()){
+                if (restaurant.getDirector().equals(SessionService.getLoggedPerson())) {
+                    IDs[idx++] = restaurant.getRestaurantID();
+                    System.out.println(restaurant.getRestaurantName());
+                }
+            }
+            System.out.println("Select restaurant to extend (1->" + dataManager.getRestaurants().size() + "):");
+            String ans = reader.nextLine();
+
+            int value;
+            try {
+                value = Integer.parseInt(ans);
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a numeric value!");
+                continue;
+            }
+
+            if (value > 0 && value <= dataManager.getRestaurants().size()) {
+                choice = dataManager.getRestaurants().get(IDs[value]);
+                System.out.println("Where to create new franchise?");
+                String ans2 = reader.nextLine();
+                Franchise franchise = new Franchise(ans2, choice);
+                dataManager.addFranchise(franchise);
+                bNumIsValid = true;
+            } else {
+                System.out.println("Input a value that is in the correct range!");
+            }
+        }
+    }
+
+    private void AppointManager() {
+        actionService.writeToLogFile("appoint_manager");
+        Restaurant rChoice = null;
+        Person mgrChoice = null;
+        Franchise frChoice = null;
+        int franchiseCnt = 0;
+        int managerCnt = 0;
+
+        boolean bNumIsValid = false;
+        while (!bNumIsValid) {
+            System.out.println("These are the restaurants you own:");
+            int idx = 1;
+            String[] IDs = new String[dataManager.getRestaurants().size() + 2];
+            for (Restaurant restaurant : dataManager.getRestaurants().values()) {
+                if (restaurant.getDirector().equals(SessionService.getLoggedPerson())) {
+                    IDs[idx++] = restaurant.getRestaurantID();
+                    System.out.println(restaurant.getRestaurantName());
+                }
+            }
+            System.out.println("Select restaurant to extend (1->" + (idx - 1) + "):");
+            String ans = reader.nextLine();
+
+            int value;
+            try {
+                value = Integer.parseInt(ans);
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a numeric value!");
+                continue;
+            }
+
+            if (value > 0 && value <= idx - 1) {
+                rChoice = dataManager.getRestaurants().get(IDs[value]);
+                bNumIsValid = true;
+            }
+        }
+        bNumIsValid = false;
+        while (!bNumIsValid) {
+            System.out.println("These are the franchises that belong to selected restaurant:");
+            int idx = 1;
+            String[] IDs = new String[dataManager.getFranchises().size() + 2];
+            for (Franchise franchise : dataManager.getFranchises().values()) {
+                if (franchise.getRestaurant().equals(rChoice)) {
+                    franchiseCnt += 1;
+                    IDs[idx++] = franchise.getFranchiseID();
+                    System.out.println(franchise.getLocation());
+                }
+            }
+            System.out.println("Select franchise (1->" + franchiseCnt + "):");
+            String ans = reader.nextLine();
+
+            int value;
+            try {
+                value = Integer.parseInt(ans);
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a numeric value!");
+                continue;
+            }
+
+            if (value > 0 && value <= franchiseCnt) {
+                frChoice = dataManager.getFranchises().get(IDs[value]);
+            } else {
+                System.out.println("Input a value that is in the correct range!");
+            }
+            bNumIsValid = true;
+        }
+        bNumIsValid = false;
+        while (!bNumIsValid) {
+            System.out.println("These are the managers you can apoint:");
+            int idx = 1;
+            String[] IDs = new String[dataManager.getPersons().size() + 2];
+            for (Person person : dataManager.getPersons().values()) {
+                if (person.getPersonType() == PersonType.MANAGER) {
+                    managerCnt += 1;
+                    IDs[idx++] = person.getUsername();
+                    System.out.println(person.getFirstName() + " " + person.getLastName());
+                }
+            }
+            System.out.println("Select manager (1->" + managerCnt + "):");
+            String ans = reader.nextLine();
+
+            int value;
+            try {
+                value = Integer.parseInt(ans);
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a numeric value!");
+                continue;
+            }
+
+            if (value > 0 && value <= managerCnt) {
+                mgrChoice = dataManager.getPersons().get(IDs[value]);
+            } else {
+                System.out.println("Input a value that is in the correct range!");
+            }
+            bNumIsValid = true;
+        }
+
+        assert(rChoice != null);
+        assert(frChoice != null);
+        assert(mgrChoice != null);
+        frChoice.appointManager(mgrChoice);
+        dataManager.updateFranchise(frChoice);
+    }
+
+    private void PastOrders(Person person) {
+        for (Order order : dataManager.getOrders().values()) {
+            if (order.getClient().equals(person)) {
+                System.out.println(order);
             }
         }
     }

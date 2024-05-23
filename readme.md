@@ -1,27 +1,27 @@
 # Food Delivery 
 
-## Clase
+## Classes
 
-(in proces de modificare)
-- Product (Abstract)
-    - Ingredient
-    - Item
-        - Beverage
-- Meal (Abstract)
-    - Dish
-    - Desert
+- Ingredient - Component of a meal
+- Item - Plastic Kitchenware, Straw, etc.
+- Meal - What a Restaurant serves
+    - MealType (Enum) - Distinguishes if the meal is a desert,  
 - Kitchen
 - Franchise
 - Restaurant
 - Order
-- Person (Abstract)
-    - Client
-    - Manager
-    - Director
-    - DeliveryDriver
+  - OrderStatus (Enum)
+  - OrderType (Enum)
+- Person 
+  - PersonType (Enum)
 
 ## Actiuni / Interogari
-1. Utilizator se poate inregistra
-2. Utilizator se poate autentifica
-3. Client poate plasa comanda
-4. 
+
+1. User can register with an account
+2. User can login into his account
+3. Client can place an order
+4. Client can consult his past orders 
+5. Director can open a new restaurant chain
+6. Director can list restaurants 
+7. Director can open a new franchise (for a restaurant that is under his jurisdiction)
+8. Director cam appoint a manager for a franchise

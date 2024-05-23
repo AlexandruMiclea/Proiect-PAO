@@ -130,6 +130,10 @@ create table if not exists `Meal_in_Restaurant` (
     foreign key (mealID) references  Meal(mealID)
 );
 
+insert into `Meal_in_Restaurant` values ('mock_restaurant_id', 'mock_desert');
+insert into `Meal_in_Restaurant` values ('mock_restaurant_id', 'mock_beverage');
+insert into `Meal_in_Restaurant` values ('mock_restaurant', 'mock_dish');
+insert into `Meal_in_Restaurant` values ('mock_restaurant', 'mock_beverage');
 -- todo add inserts here for mock data
 
 create table if not exists `Ingredient_in_Kitchen` (

@@ -5,7 +5,7 @@ public enum OrderType {
     TAKEAWAY("takeaway"),
     DELIVERY("delivery");
     private final String description;
-    private OrderType(String value){
+    OrderType(String value){
         description = value;
     }
 

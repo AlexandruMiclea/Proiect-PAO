@@ -2,6 +2,7 @@ package model.location;
 
 import model.food.*;
 import model.people.Person;
+import util.RandomString;
 
 import java.io.*;
 import java.util.*;
@@ -34,6 +35,12 @@ public class Restaurant {
         this.director = director;
     }
 
+    public Restaurant(String restaurantName, Person director) {
+        this.restaurantID = RandomString.getRandomString();
+        this.restaurantName = restaurantName;
+        this.director = director;
+    }
+
     public String getRestaurantName() {
         return restaurantName;
     }
@@ -50,9 +57,17 @@ public class Restaurant {
     public String toString() {
         String ans = "Restaurant " + restaurantName + ", which serves the following meals:\n";
         for (Meal meal : mealsInCatalogue) {
-            ans += meal.toString() + '\n';
+            ans += "* " + meal.getMealName() + '\n';
         }
         ans = ans.substring(0, ans.length() - 1);
         return ans;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Restaurant that = (Restaurant) o;
+        return Objects.equals(restaurantID, that.restaurantID);
     }
 }

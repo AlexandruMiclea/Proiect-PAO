@@ -8,13 +8,6 @@ public class DbConnection {
     private static final String pass = "RootPa55!";
     private static Connection connection;
 
-    public static Connection getConnection() {
-        if (DbConnection.connection != null) {
-            connection = getDbConnection();
-        }
-        return DbConnection.connection;
-    }
-
     public static Connection getDbConnection() {
         try{
             if (DbConnection.connection == null || DbConnection.connection.isClosed()){

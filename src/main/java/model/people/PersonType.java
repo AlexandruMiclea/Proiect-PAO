@@ -9,7 +9,7 @@ public enum PersonType {
     DELIVERY_DRIVER("Delivery Driver"),
     COOK("Cook");
     private final String description;
-    private PersonType(String value){
+    PersonType(String value){
         description = value;
     }
 

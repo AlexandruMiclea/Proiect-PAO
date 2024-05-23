@@ -4,7 +4,9 @@ package model.order;
 import model.location.Restaurant;
 import model.people.Person;
 import model.people.PersonType;
+import util.RandomString;
 
+import java.time.Instant;
 import java.util.Date;
 
 public class Order {
@@ -53,6 +55,16 @@ public class Order {
         this.deliveryDriver = deliveryDriver;
         this.client = client;
         this.orderDate = orderDate;
+    }
+
+    // placeOrder ctor
+    public Order(OrderType orderType, Restaurant restaurant, Person client) {
+        this.orderID = RandomString.getRandomString();
+        this.orderType = orderType;
+        this.orderStatus = OrderStatus.RECEIVED;
+        this.restaurant = restaurant;
+        this.client = client;
+        this.orderDate = Date.from(Instant.now());
     }
 
     public void assignDeliveryDriver(Person person){

@@ -2,6 +2,8 @@ package model.people;
 
 import util.RandomString;
 
+import java.util.Objects;
+
 public class Person {
     private final String personID;
     private String username;
@@ -65,6 +67,17 @@ public class Person {
     }
 
     // register constructor TODO implement
+
+    // equals
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(personID, person.personID);
+    }
 
     // todo repair tostring
     @Override

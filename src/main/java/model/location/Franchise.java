@@ -1,6 +1,7 @@
 package model.location;
 
 import model.people.Person;
+import util.RandomString;
 
 public class Franchise{
     private final String franchiseID;
@@ -29,6 +30,16 @@ public class Franchise{
         this.restaurant = restaurant;
         this.manager = manager;
         this.location = location;
+    }
+
+    public Franchise(String location, Restaurant restaurant) {
+        this.location = location;
+        this.franchiseID = RandomString.getRandomString();
+        this.restaurant = restaurant;
+    }
+
+    public void appointManager(Person manager) {
+        this.manager = manager;
     }
 
     @Override

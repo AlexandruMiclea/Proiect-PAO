@@ -56,7 +56,7 @@ public class Meal {
 
     @Override
     public String toString() {
-        String ans = mealType + " " + mealName + ", prepare time: " + timeToPrepare + ", price: " + price + ".\n";
+        String ans = mealType + " " + mealName + ", prepare time: " + timeToPrepare + ", price: " + price + ". ";
         ans += "Ingredient list:\n";
         for (Ingredient ingredient : ingredientList.keySet()){
             ans += "* " + ingredient.getIngredientName() + "\n";
